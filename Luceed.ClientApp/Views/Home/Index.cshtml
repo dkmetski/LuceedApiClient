@@ -1,0 +1,223 @@
+﻿@model Luceed.ClientApp.Models.QueryInputData
+
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+@using (Html.BeginForm())
+{
+    <div class="jumbotron">
+        <h1>ASP.NET MVC app</h1>
+        <p class="lead">This asp.net client app retrieves information about items and payments for a specific query.</p>
+        @if (ViewBag.CurrentException != null)
+        {<p class="lead" style="color:red;"> Latest exception: @ViewBag.CurrentException </p>}
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h2>List of items by name or part of a name.</h2>
+            <div>
+                @Html.Label("Item description")
+                @Html.EditorFor(model => model.FieldQ1F1, new { htmlAttributes = new { @class = "form-control", placeholder = "For example Kabel..." } })
+                @Html.ValidationMessageFor(model => model.FieldQ1F1, "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <button type="submit" class="btn btn-flat btn-success btn-sm" value=Query1 name="submitButton" style="position:center">
+                    SEARCH &raquo;
+                </button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h2>
+                List of payment calculations by date and type of payment.
+            </h2>
+            <div>
+                @Html.LabelFor(model => model.FieldQ2F1, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.FieldQ2F1, new { htmlAttributes = new { @class = "form-control", placeholder = "For example 4986-1..." } })
+                @Html.ValidationMessageFor(model => model.FieldQ2F1, "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(model => model.FieldQ2F2, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.FieldQ2F2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FieldQ2F2, "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(model => model.FieldQ2F3, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.FieldQ2F3, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FieldQ2F3, "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <button type="submit" class="btn btn-flat btn-success btn-sm" value=Query2 name="submitButton" style="position:center">
+                    SEARCH &raquo;
+                </button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <h2> List of items by date and type of payment.</h2>
+            <br />
+            <div>
+                @Html.LabelFor(model => model.FieldQ3F1, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.FieldQ3F1, new { htmlAttributes = new { @class = "form-control", placeholder = "For example 4986-1..." } })
+                @Html.ValidationMessageFor(model => model.FieldQ3F1, "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(model => model.FieldQ3F2, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.FieldQ3F2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FieldQ3F2, "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                @Html.LabelFor(model => model.FieldQ3F3, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.FieldQ3F3, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.FieldQ3F3, "", new { @class = "text-danger" })
+            </div>
+            <br />
+            <div>
+                <button type="submit" class="btn btn-flat btn-success btn-sm" value=Quer3 name="submitButton" style="position:center">
+                    SEARCH &raquo;
+                </button>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    if (ViewBag.Query1 != null)
+    {
+        <div class="row">
+            <table class="table table-bordered table-sm" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            Item ID
+                        </th>
+                        <th>
+                            Item Description
+                        </th>
+                    </tr>
+                </thead>
+                @foreach (var item in ViewBag.Query1)
+                {
+                    <tbody>
+
+
+                        <tr frame="box">
+                            <td>
+                                @item.ArtiklUid
+                            </td>
+                            <td>
+                                @item.NazivArtikla
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+
+
+    }
+
+    if (ViewBag.Query2 != null)
+    {
+
+            <div class="row">
+                <table class="table table-bordered table-sm" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                VrstePlacanjaUid
+                            </th>
+                            <th>
+                                Naziv
+                            </th>
+                            <th>
+                                Iznos
+                            </th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in ViewBag.Query2)
+                    {
+                    <tbody>
+
+                        <tr frame="box">
+                            <td>
+                                @item.VrstePlacanjaUid
+                            </td>
+                            <td>
+                                @item.Naziv
+                            </td>
+                            <td>
+                                @item.Iznos
+                            </td>
+                        </tr>
+
+                    </tbody>
+                    }
+                </table>
+            </div>
+
+
+    }
+
+    if (ViewBag.Query3 != null)
+    {
+
+            <div class="row">
+                <table class="table table-bordered table-sm" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>
+                                ArtiklUid
+                            </th>
+                            <th>
+                                NazivArtikla
+                            </th>
+                            <th>
+                                Kolicina
+                            </th>
+                            <th>
+                                Iznos
+                            </th>
+                            <th>
+                                Usluga
+                            </th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in ViewBag.Query3)
+                    {
+                    <tbody>
+
+
+                        <tr frame="box">
+                            <td>
+                                @item.ArtiklUid
+                            </td>
+                            <td>
+                                @item.NazivArtikla
+                            </td>
+                            <td>
+                                @item.Kolicina
+                            </td>
+                            <td>
+                                @item.Iznos
+                            </td>
+                            <td>
+                                @item.Usluga
+                            </td>
+                        </tr>
+
+                    </tbody>
+                    }
+                </table>
+            </div>
+
+        }
+    }
+}
